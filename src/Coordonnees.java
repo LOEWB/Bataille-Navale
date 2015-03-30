@@ -1,12 +1,20 @@
-
+/* TODO package. */
+/* TODO JAVADOC. */
 public class Coordonnees {
-private static int axeX;
-private static int axeY;
+    /* TODO JAVADOC. */
+    private static int axeX;
+    /* TODO JAVADOC. */
+    private static int axeY;
 
-public int getAxeX() {
-	return axeX;
-}
-public int getAxeY() {
-	return axeY;
-}
+    /* TODO JAVADOC. */
+    /* TODO Franglais. */
+    public int getAxeX() {
+        return axeX;
+    }
+
+    /* TODO JAVADOC. */
+    /* TODO Franglais. */
+    public int getAxeY() {
+        return axeY;
+    }
 }

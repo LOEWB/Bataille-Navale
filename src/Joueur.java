@@ -1,5 +1,7 @@
-
+/* TODO package. */
 public class Joueur {
-private String nom;
-private int numero;
+    /* TODO JAVADOC. */
+    private String nom;
+    /* TODO JAVADOC. */
+    private int    numero;
 }

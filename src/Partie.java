@@ -1,5 +1,7 @@
-
+/* TODO package. */
 public class Partie {
-private Joueur J1;
-private Joueur J2;
+    /* TODO JAVADOC. */
+    private Joueur J1;
+    /* TODO JAVADOC. */
+    private Joueur J2;
 }

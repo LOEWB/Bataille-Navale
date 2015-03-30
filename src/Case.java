@@ -1,5 +1,8 @@
-
+/* TODO package. */
+/* TODO JAVADOC. */
 public class Case {
-Coordonnees coordonnes;
-TypeCase typeCase;
+    /* TODO JAVADOC. */
+    Coordonnees coordonnes;
+    /* TODO JAVADOC. */
+    TypeCase typeCase;
 }
