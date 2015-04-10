@@ -1,4 +1,6 @@
 /* TODO package. */
 /* TODO JAVADOC. */
-public enum TypeCase {
+public enum TypeCase 
+{
+	BATEAU,PION;
 }

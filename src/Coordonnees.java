@@ -17,4 +17,9 @@ public class Coordonnees {
     public int getAxeY() {
         return axeY;
     }
+    public Coordonnees(int X, int Y)
+    {
+    	this.axeX = X;
+    	this.axeY = Y;
+    }
 }
