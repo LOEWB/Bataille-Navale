@@ -1,10 +1,11 @@
+package fr.iutvalence.loewb.bataillenavale;
 /* TODO package. */
 /* TODO JAVADOC. */
 public class Coordonnees {
     /* TODO JAVADOC. */
-    private static int axeX;
+    private final int axeX;
     /* TODO JAVADOC. */
-    private static int axeY;
+    private final int axeY;
 
     /* TODO JAVADOC. */
     /* TODO Franglais. */

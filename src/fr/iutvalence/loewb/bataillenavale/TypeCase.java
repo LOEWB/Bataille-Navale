@@ -1,6 +1,7 @@
+package fr.iutvalence.loewb.bataillenavale;
 /* TODO package. */
 /* TODO JAVADOC. */
 public enum TypeCase 
 {
-	BATEAU,PION;
+	BOAT,CHECKER;
 }

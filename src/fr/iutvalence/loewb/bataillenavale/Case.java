@@ -1,21 +1,22 @@
+package fr.iutvalence.loewb.bataillenavale;
 /* TODO package. */
 /* TODO JAVADOC. */
 public class Case {
     /* TODO JAVADOC. */
-    private Coordonnees coordonnes;
+    private final Coordonnees coordonnes;
     /* TODO JAVADOC. */
-    private TypeCase typeCase;
+    private final TypeCase typeCase;
     
-    private boolean BoatBool;
+    private boolean boatBool;
     
-    private boolean CheckerBool;
+    private boolean checkerBool;
     
     public Case (Coordonnees coor,TypeCase type)
     {
     	this.coordonnes = coor;
     	this.typeCase = type;
-    	this.BoatBool = false;
-    	this.CheckerBool = false;
+    	this.boatBool = false;
+    	this.checkerBool = false;
     }
     
 	public Coordonnees getCoordonnes() 
@@ -30,12 +31,12 @@ public class Case {
 	
 	public boolean isBoatBool() 
 	{
-		return BoatBool;
+		return boatBool;
 	}
 	
 	public boolean isCheckerBool() 
 	{
-		return CheckerBool;
+		return checkerBool;
 	}
     
 }
