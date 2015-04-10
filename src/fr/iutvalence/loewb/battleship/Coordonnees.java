@@ -1,4 +1,4 @@
-package fr.iutvalence.loewb.bataillenavale;
+package fr.iutvalence.loewb.battleship;
 /* TODO package. */
 /* TODO JAVADOC. */
 public class Coordonnees {
