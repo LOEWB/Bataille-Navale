@@ -3,9 +3,9 @@ package fr.iutvalence.loewb.bataillenavale;
 /* TODO JAVADOC. */
 public class Coordonnees {
     /* TODO JAVADOC. */
-    private final int axeX;
+    private int axeX;
     /* TODO JAVADOC. */
-    private final int axeY;
+    private int axeY;
 
     /* TODO JAVADOC. */
     /* TODO Franglais. */
@@ -23,4 +23,13 @@ public class Coordonnees {
     	this.axeX = X;
     	this.axeY = Y;
     }
+
+	public void setAxeX(int axeX) {
+		this.axeX = axeX;
+	}
+
+	public void setAxeY(int axeY) {
+		this.axeY = axeY;
+	}
+    
 }

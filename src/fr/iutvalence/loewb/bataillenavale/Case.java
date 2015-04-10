@@ -3,7 +3,7 @@ package fr.iutvalence.loewb.bataillenavale;
 /* TODO JAVADOC. */
 public class Case {
     /* TODO JAVADOC. */
-    private final Coordonnees coordonnes;
+    private final Coordonnees coordonnees;
     /* TODO JAVADOC. */
     private final TypeCase typeCase;
     
@@ -11,9 +11,9 @@ public class Case {
     
     private boolean checkerBool;
     
-    public Case (Coordonnees coor,TypeCase type)
+    public Case (TypeCase type)
     {
-    	this.coordonnes = coor;
+    	this.coordonnees = null;
     	this.typeCase = type;
     	this.boatBool = false;
     	this.checkerBool = false;
@@ -21,7 +21,7 @@ public class Case {
     
 	public Coordonnees getCoordonnes() 
 	{
-		return coordonnes;
+		return coordonnees;
 	}
 	
 	public TypeCase getTypeCase() 
@@ -37,6 +37,13 @@ public class Case {
 	public boolean isCheckerBool() 
 	{
 		return checkerBool;
+	}
+	
+	public void setCoordonnees(int x, int y)
+	{
+		this.coordonnees.setAxeX(x);
+		this.coordonnees.setAxeY(y);
+	}
 	}
     
 }
