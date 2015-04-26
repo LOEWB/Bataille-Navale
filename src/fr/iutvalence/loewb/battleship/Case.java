@@ -1,53 +1,45 @@
 package fr.iutvalence.loewb.battleship;
 
-/* TODO JAVADOC. */
-public class Case {
-    /* TODO Translate. */
-    /* TODO JAVADOC. */
-    private final Coordonnees coordonnees;
-    /* TODO JAVADOC. */
-    private final TypeCase    typeCase;
-    /* TODO JAVADOC. */
-    /* TODO boatBool ≠ typeCase == TypeCase.BOAT ? */
-    private boolean boatBool;
-    /* TODO JAVADOC. */
-	/* TODO boatBool ≠ typeCase == TypeCase.CHECKER ? */
-    private boolean checkerBool;
+/** Defines a case of a grid. Designed to contain either a part of a boat or a checker */
+public class Case 
+{
+    
+    /** Variable: boolean which indicates if the case is used or not (either by a part of a boat or a checker) */
+    private boolean used = false;
 
-    /* TODO JAVADOC. */
-    public Case(TypeCase type) {
-        this.coordonnees = null;
-        this.typeCase = type;
-        this.boatBool = false;
-        this.checkerBool = false;
+    /** Constructor*/
+    public Case() 
+    {
+        this.used = false;
     }
 
-    /* TODO Translate. */
-    /* TODO JAVADOC. */
-    public Coordonnees getCoordonnes() {
-        return coordonnees;
+    /** Method: To know if the case is used or not 
+     * 
+     * @return used -> the state of the case
+     */
+    public boolean isUsedBool() 
+    {
+        return this.used;
     }
-
-    /* TODO JAVADOC. */
-    public TypeCase getTypeCase() {
-        return typeCase;
+    
+    /** Method: To use a case by changing its state if it's not used*/
+    public void changeState()
+    {
+    	if (this.isUsedBool()==false)
+    			this.used = true;
+    	else 
+    		this.used = false;
     }
-
-    /* TODO JAVADOC. */
-    public boolean isBoatBool() {
-        return boatBool;
-    }
-
-    /* TODO JAVADOC. */
-    public boolean isCheckerBool() {
-        return checkerBool;
-    }
-
-    /* TODO "Coordonnees" are mutable ? */
-    /* TODO JAVADOC. */
-    public void setCoordonnees(int x, int y) {
-        this.coordonnees.setAxeX(x);
-        this.coordonnees.setAxeY(y);
+    
+    /** Method: To display the state of a case using asciiArt
+     * 
+     * @return a string displaying the state of the case using asciiArt
+     */
+    public String toString()
+    {
+    	if (this.isUsedBool()==false)
+    		return "|   ";
+    	else return "| X ";
     }
 }
-}
+
