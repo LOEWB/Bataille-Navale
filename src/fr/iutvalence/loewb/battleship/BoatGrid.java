@@ -5,7 +5,7 @@ import fr.iutvalence.loewb.boats.Battleship;
 import fr.iutvalence.loewb.boats.Destroyer;
 import fr.iutvalence.loewb.boats.PetroleBoat;
 import fr.iutvalence.loewb.boats.Submarine;
-
+/** Defines the grid extending the class Grid, which is designed to contain boats */
 public class BoatGrid extends Grid
 {
 	/** Variable: table of 5 boats which is the fleet of this current player*/

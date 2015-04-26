@@ -1,6 +1,6 @@
 package fr.iutvalence.loewb.battleship;
 /* TODO package. */
-/* TODO JAVADOC. */
+/** Defines a coordinates with too axis X and Y */
 public class Coordinates 
 {
     /** Variable: final integer of the X axis of the coordinate */
