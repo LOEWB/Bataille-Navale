@@ -64,11 +64,10 @@ public class BoatGrid extends Grid
     			this.casesTable[rowNumber+boat.coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
     	}
     }
-    public void moveBoat(Boat boat, boolean horizontal, Coordinates coordinates)
+    public void moveBoat(Boat boat, Coordinates coordinates)
     {
     	this.removeBoat(boat);
     	boat.setCoordinates(coordinates);
-    	boat.setHorizontal(horizontal);
     	placeBoat(boat);
     }
     /** Method: To get the fleet table of the player
@@ -77,5 +76,14 @@ public class BoatGrid extends Grid
      */
   	public Boat[] getFleet() {
   		return fleet;
+  	}
+  	public void rotationBoat(Boat boat)
+  	{
+  		this.removeBoat(boat);
+  		if (boat.horizontal)
+  			boat.setHorizontal(false);
+  		else
+  			boat.setHorizontal(true);
+  		this.placeBoat(boat);
   	}
 }
