@@ -86,4 +86,9 @@ public class BoatGrid extends Grid
   			boat.setHorizontal(true);
   		this.placeBoat(boat);
   	}
+  	public boolean movePossible(Boat boat, Coordinates coordinates)
+  	{
+  		this.removeBoat(boat);
+  		//TODO
+  	}
 }
