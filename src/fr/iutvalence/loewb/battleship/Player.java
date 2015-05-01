@@ -45,14 +45,14 @@ public class Player
      * 
      * @return his boat grid
      */
-  	public Grid getBoatGrid() {
+  	public BoatGrid getBoatGrid() {
   		return boatGrid;
   	}
   	/** Method: To get the checker grid of the player
      * 
      * @return his checker grid
      */
-  	public Grid getCheckerGrid() {
+  	public CheckerGrid getCheckerGrid() {
   		return checkerGrid;
   	}
 }

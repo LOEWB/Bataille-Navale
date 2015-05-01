@@ -24,6 +24,7 @@ public class BoatGrid extends Grid
         	placeBoat(fleet[i]);
     }
     
+    
     /** Method: To fill the fleet table with instantiation of the 5 boats*/
     public void fillFleet()
     {
@@ -51,12 +52,16 @@ public class BoatGrid extends Grid
     	}
     }
     
+    /**Method : to remove a boat from the grid
+     * 
+     * @param boat
+     */
     public void removeBoat(Boat boat)
     {
     if (boat.horizontal == true)
     	{
-    		for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
-    			this.casesTable[boat.coordinates.getAxisX()][columneNumber+boat.coordinates.getAxisY()].changeState();
+    		for (int columnNumber= 0; columnNumber<boat.size;columnNumber++)
+    			this.casesTable[boat.coordinates.getAxisX()][columnNumber+boat.coordinates.getAxisY()].changeState();
     	}
     	else 
     	{
@@ -64,19 +69,38 @@ public class BoatGrid extends Grid
     			this.casesTable[rowNumber+boat.coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
     	}
     }
-    public void moveBoat(Boat boat, Coordinates coordinates)
+    
+    /** Method: to move a boat on the grid
+     * 
+     * @param boat
+     * @param coordinates
+     * @return boolean: true if the move have been done properly
+     */
+    public boolean moveBoat(Boat boat, Coordinates coordinates)
     {
-    	this.removeBoat(boat);
-    	boat.setCoordinates(coordinates);
-    	placeBoat(boat);
+    	if (this.movePossible(boat, coordinates))
+    	{
+    		this.removeBoat(boat);
+    		boat.setCoordinates(coordinates);
+    		placeBoat(boat);
+    		return true;
+    	}
+    	return false;
     }
+    
     /** Method: To get the fleet table of the player
      * 
      * @return his fleet table
      */
-  	public Boat[] getFleet() {
+  	public Boat[] getFleet() 
+  	{
   		return fleet;
   	}
+  	
+  	/** Method: To rotate a boat
+  	 * 
+  	 * @param boat
+  	 */
   	public void rotationBoat(Boat boat)
   	{
   		this.removeBoat(boat);
@@ -86,9 +110,101 @@ public class BoatGrid extends Grid
   			boat.setHorizontal(true);
   		this.placeBoat(boat);
   	}
+  	
+  	/** Method: To know if we can place a boat on a given position
+  	 * 
+  	 * @param boat
+  	 * @param coordinates
+  	 * @return boolean: true if we can move the boat
+  	 */
   	public boolean movePossible(Boat boat, Coordinates coordinates)
   	{
   		this.removeBoat(boat);
-  		//TODO
+  		//coordinate on the X and Y axis
+  			if (this.isInTheGrid(coordinates))
+  			{
+  				//for horizontal orientation
+  				if(boat.isHorizontal())
+  				{
+  					if(this.isInTheGrid(new Coordinates(coordinates.getAxisX(),coordinates.getAxisY()+boat.size-1)))
+  					{
+  						int columnNumber= 0;
+  						while (columnNumber<boat.size && this.isCaseAvailable(new Coordinates(coordinates.getAxisX(),coordinates.getAxisY()+columnNumber)))
+  							{
+  								columnNumber++;
+  							}
+  						if (columnNumber == boat.size)
+  						{
+  	  						this.placeBoat(boat);
+  	  						return true;
+  	  					}
+  					}
+  				}
+  				//for the vertical orientation
+  				else
+  				{
+  					if(this.isInTheGrid(new Coordinates(coordinates.getAxisX()+boat.size-1,coordinates.getAxisY())))
+  					{
+  						int rowNumber= 0;
+  						while (rowNumber<boat.size && this.isCaseAvailable(new Coordinates(coordinates.getAxisX()+rowNumber,coordinates.getAxisY())))
+  							rowNumber++;
+  						if (rowNumber == boat.size)
+  						{
+  							this.placeBoat(boat);
+  							return true;
+  						}
+  					}
+  				}	
+  			}
+  			this.placeBoat(boat);
+  			return false;
   	}
+  	
+  	/** Method: To check if the coordinates are in the grid
+  	 * 
+  	 * @param coordinates
+  	 * @return boolean: is in grid or not
+  	 */
+  	public boolean isInTheGrid(Coordinates coordinates)
+  	{
+  		if (coordinates.getAxisX()<ROW_NUMBER && coordinates.getAxisX()>=0)
+  			if (coordinates.getAxisY()<COLUMN_NUMBER && coordinates.getAxisY()>=0)
+  				return true;
+  		return false;
+  	}
+  	
+  	/** Method: To assess if there isn't any case used around the current coordinates
+  	 * 
+  	 * @param coordinates
+  	 * @return boolean: true for no case used around
+  	 */
+  	public boolean isCaseAvailable(Coordinates coordinates)
+  	{
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX()-1,coordinates.getAxisY()-1)))
+  			if(this.casesTable[coordinates.getAxisX()-1][coordinates.getAxisY()-1].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX()-1,coordinates.getAxisY())))
+  			if(this.casesTable[coordinates.getAxisX()-1][coordinates.getAxisY()].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX()-1,coordinates.getAxisY()+1)))
+  			if(this.casesTable[coordinates.getAxisX()-1][coordinates.getAxisY()+1].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX(),coordinates.getAxisY()-1)))
+  			if(this.casesTable[coordinates.getAxisX()][coordinates.getAxisY()-1].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX(),coordinates.getAxisY()+1)))
+  			if(this.casesTable[coordinates.getAxisX()][coordinates.getAxisY()+1].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX()+1,coordinates.getAxisY()-1)))
+  			if(this.casesTable[coordinates.getAxisX()+1][coordinates.getAxisY()-1].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX()+1,coordinates.getAxisY())))
+  			if(this.casesTable[coordinates.getAxisX()+1][coordinates.getAxisY()].isUsedBool())
+  				return false;
+  		if (this.isInTheGrid(new Coordinates(coordinates.getAxisX()+1,coordinates.getAxisY()+1)))
+  			if(this.casesTable[coordinates.getAxisX()+1][coordinates.getAxisY()+1].isUsedBool())
+  				return false;
+  		return true;
+  	}
+  	
 }

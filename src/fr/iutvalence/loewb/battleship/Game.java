@@ -7,7 +7,11 @@ public class Game
 	public static void main (String args[])
 	{
 		Player p1 = new Player("Joueur 1",1);
-		p1.boatGrid.moveBoat(p1.boatGrid.getFleet()[2], false, new Coordinates(4,6));
+		p1.boatGrid.rotationBoat(p1.boatGrid.getFleet()[2]);
+		//this move is possible so it's done
+		p1.boatGrid.moveBoat(p1.boatGrid.getFleet()[2], new Coordinates(0,9));
+		//this move is impossible because there is another boat next to it. So nothing is done.
+		p1.boatGrid.moveBoat(p1.boatGrid.getFleet()[2], new Coordinates(5,3));
 		System.out.println(p1.getBoatGrid());
 	}
 }
