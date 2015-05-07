@@ -101,16 +101,37 @@ public class Player
      */
     public void placeBoat(Boat boat, Coordinates coordinates)
     {
-    	if (boat.horizontal == true)
+    	if(this.movePossible(boat, coordinates))
     	{
-    		for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
-    			this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
+    		if (boat.horizontal == true)
+    		{
+    			for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
+    				this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
+    		}
+    		else 
+    		{
+    			for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
+    				this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
+    		}
     	}
-    	else 
-    	{
-    		for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
-    			this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
-    	}
+    }
+    /** Method: To place a boat on the grid. Only for boat grids
+     * 
+     * @param boat
+     */
+    public void placeBoatNoTest(Boat boat, Coordinates coordinates)
+    {
+    	
+    		if (boat.horizontal == true)
+    		{
+    			for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
+    				this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
+    		}
+    		else 
+    		{
+    			for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
+    				this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
+    		}
     }
     /** Method: to move a boat on the grid
      * 
@@ -187,7 +208,7 @@ public class Player
   							}
   						if (columnNumber == boat.size)
   						{
-  	  						this.placeBoat(boat,boat.getCoordinates());
+  	  						this.placeBoatNoTest(boat,boat.getCoordinates());
   	  						return true;
   	  					}
   					}
@@ -202,13 +223,13 @@ public class Player
   							rowNumber++;
   						if (rowNumber == boat.size)
   						{
-  							this.placeBoat(boat,boat.getCoordinates());
+  							this.placeBoatNoTest(boat,boat.getCoordinates());
   							return true;
   						}
   					}
   				}	
   			}
-  			this.placeBoat(boat,boat.getCoordinates());
+  			this.placeBoatNoTest(boat,boat.getCoordinates());
   			return false;
   	}
 }
