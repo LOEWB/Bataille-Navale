@@ -95,7 +95,7 @@ public class Player
   	{
   		return checkerGrid;
   	}
-  	/** Method: To place a boat on the grid. Only for boat grids
+  	/** Method: To place a boat on the boat grid
      * 
      * @param boat
      */
@@ -115,24 +115,7 @@ public class Player
     		}
     	}
     }
-    /** Method: To place a boat on the grid. Only for boat grids
-     * 
-     * @param boat
-     */
-    public void placeBoatNoTest(Boat boat, Coordinates coordinates)
-    {
-    	
-    		if (boat.horizontal == true)
-    		{
-    			for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
-    				this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
-    		}
-    		else 
-    		{
-    			for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
-    				this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
-    		}
-    }
+    
     /** Method: to move a boat on the grid
      * 
      * @param boat
@@ -141,13 +124,14 @@ public class Player
      */
     public boolean moveBoat(Boat boat, Coordinates coordinates)
     {
+    	this.removeBoat(boat);
     	if (this.movePossible(boat, coordinates))
     	{
-    		this.removeBoat(boat);
     		boat.setCoordinates(coordinates);
     		placeBoat(boat,coordinates);
     		return true;
     	}
+    	placeBoat(boat,boat.getCoordinates());
     	return false;
     }
 	
@@ -155,15 +139,18 @@ public class Player
   	 * 
   	 * @param boat
   	 */
-  	public void rotationBoat(Boat boat)
-  	{
-  		this.removeBoat(boat);
-  		if (boat.horizontal)
-  			boat.setHorizontal(false);
-  		else
-  			boat.setHorizontal(true);
-  		this.placeBoat(boat,boat.getCoordinates());
-  	}
+    public void rotationBoat(Boat boat)
+    {
+    	this.removeBoat(boat);
+    	if(this.rotationPossible(boat))
+    	{
+    		if (boat.horizontal)
+    			boat.setHorizontal(false);
+    		else
+    			boat.setHorizontal(true);
+    	}
+    	this.placeBoat(boat,boat.getCoordinates());
+    }
     
 
     /**Method : to remove a boat from the grid
@@ -192,7 +179,6 @@ public class Player
   	 */
   	public boolean movePossible(Boat boat, Coordinates coordinates)
   	{
-  		this.removeBoat(boat);
   		//coordinate on the X and Y axis
   			if (this.boatGrid.isInTheGrid(coordinates))
   			{
@@ -208,7 +194,6 @@ public class Player
   							}
   						if (columnNumber == boat.size)
   						{
-  	  						this.placeBoatNoTest(boat,boat.getCoordinates());
   	  						return true;
   	  					}
   					}
@@ -223,13 +208,20 @@ public class Player
   							rowNumber++;
   						if (rowNumber == boat.size)
   						{
-  							this.placeBoatNoTest(boat,boat.getCoordinates());
   							return true;
   						}
   					}
   				}	
   			}
-  			this.placeBoatNoTest(boat,boat.getCoordinates());
   			return false;
+  	}
+  	
+  	public boolean rotationPossible(Boat boat)
+  	{
+  		boat.setHorizontal(!boat.isHorizontal());
+  		if(this.movePossible(boat, boat.getCoordinates()))
+  			return true;
+  		boat.setHorizontal(!boat.isHorizontal());
+  		return false;
   	}
 }
