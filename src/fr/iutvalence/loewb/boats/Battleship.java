@@ -10,5 +10,6 @@ public class Battleship extends Boat
 		this.size = 4;
 		this.horizontal = true;
 		this.coordinates = new Coordinates(2,0);
+		this.placed = false;
 	}
 }

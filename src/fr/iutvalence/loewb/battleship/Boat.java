@@ -6,8 +6,9 @@ public abstract class Boat
 	protected int size;
 	/** Variable: boolean which defines the orientation of the boat */
 	protected boolean horizontal;
+	/** Variable: boolean which defines if the boat is already placed or not on the boat grid */
+	protected boolean placed;
 	/** Variable: the coordinates of the first part of the boat*/
-	
 	protected Coordinates coordinates;	
 	/** Method: To get the size of the boat
      * 

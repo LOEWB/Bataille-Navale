@@ -17,11 +17,11 @@ public class Player
 	public final BoatGrid boatGrid;
 	/** Variable: final grid of checkers. Those checkers are placed by the enemy of this current player*/
     public final CheckerGrid checkerGrid;
-    private Boat aircraftCarrier;
-    private Boat battleship;
-    private Boat destroyer;
-    private Boat petroleBoat;
-    private Boat submarine;
+    private final Boat aircraftCarrier;
+    private final Boat battleship;
+    private final Boat destroyer;
+    private final Boat petroleBoat;
+    private final Boat submarine;
     
 
     /** Constructor: a player depending on his name and his number
@@ -101,17 +101,22 @@ public class Player
      */
     public void placeBoat(Boat boat, Coordinates coordinates)
     {
-    	if(this.movePossible(boat, coordinates))
+    	if(!boat.placed)
     	{
-    		if (boat.horizontal == true)
+    		if(this.movePossible(boat, coordinates))
     		{
-    			for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
-    				this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
-    		}
-    		else 
-    		{
-    			for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
-    				this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
+    			boat.placed = true;
+    			boat.setCoordinates(coordinates);
+    			if (boat.horizontal == true)
+    			{
+    				for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
+    					this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
+    			}
+    			else 
+    			{
+    				for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
+    					this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][coordinates.getAxisY()].changeState();
+    			}
     		}
     	}
     }
@@ -124,14 +129,18 @@ public class Player
      */
     public boolean moveBoat(Boat boat, Coordinates coordinates)
     {
-    	this.removeBoat(boat);
-    	if (this.movePossible(boat, coordinates))
+    	if (boat.placed)
     	{
-    		boat.setCoordinates(coordinates);
-    		placeBoat(boat,coordinates);
-    		return true;
+    		this.removeBoat(boat);
+    		if (this.movePossible(boat, coordinates))
+    		{
+    			boat.setCoordinates(coordinates);
+    			placeBoat(boat,coordinates);
+    			return true;
+    		}
+    		placeBoat(boat,boat.getCoordinates());
+    		return false;
     	}
-    	placeBoat(boat,boat.getCoordinates());
     	return false;
     }
 	
@@ -141,15 +150,18 @@ public class Player
   	 */
     public void rotationBoat(Boat boat)
     {
-    	this.removeBoat(boat);
-    	if(this.rotationPossible(boat))
+    	if (boat.placed)
     	{
-    		if (boat.horizontal)
-    			boat.setHorizontal(false);
-    		else
-    			boat.setHorizontal(true);
+    		this.removeBoat(boat);
+    		if(this.rotationPossible(boat))
+    		{
+    			if (boat.horizontal)
+    				boat.setHorizontal(false);
+    			else
+    				boat.setHorizontal(true);
+    		}
+    		this.placeBoat(boat,boat.getCoordinates());
     	}
-    	this.placeBoat(boat,boat.getCoordinates());
     }
     
 
@@ -159,18 +171,22 @@ public class Player
      */
     public void removeBoat(Boat boat)
     {
-    if (boat.horizontal == true)
+    	if(boat.placed)
     	{
-    		for (int columnNumber= 0; columnNumber<boat.size;columnNumber++)
-    			this.boatGrid.casesTable[boat.coordinates.getAxisX()][columnNumber+boat.coordinates.getAxisY()].changeState();
-    	}
-    	else 
-    	{
-    		for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
-    			this.boatGrid.casesTable[rowNumber+boat.coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
+    		boat.placed = false;
+    		if (boat.horizontal == true)
+    		{
+    			for (int columnNumber= 0; columnNumber<boat.size;columnNumber++)
+    				this.boatGrid.casesTable[boat.coordinates.getAxisX()][columnNumber+boat.coordinates.getAxisY()].changeState();
+    		}
+    		else 
+    		{
+    			for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
+    				this.boatGrid.casesTable[rowNumber+boat.coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
+    		}
     	}
     }
-	
+
   	/** Method: To know if we can place a boat on a given position
   	 * 
   	 * @param boat
@@ -220,7 +236,11 @@ public class Player
   	{
   		boat.setHorizontal(!boat.isHorizontal());
   		if(this.movePossible(boat, boat.getCoordinates()))
+  		{
+  			boat.setHorizontal(!boat.isHorizontal());
   			return true;
+  		}
+
   		boat.setHorizontal(!boat.isHorizontal());
   		return false;
   	}

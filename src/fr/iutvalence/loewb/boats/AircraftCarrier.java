@@ -10,5 +10,6 @@ public class AircraftCarrier extends Boat
 		this.size = 5;
 		this.horizontal = true;
 		this.coordinates = new Coordinates(0,0);
+		this.placed = false;
 	}
 }

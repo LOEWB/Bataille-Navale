@@ -10,5 +10,6 @@ public class PetroleBoat extends Boat
 		this.size = 2;
 		this.horizontal = true;
 		this.coordinates = new Coordinates(8,0);
+		this.placed = false;
 	}
 }
