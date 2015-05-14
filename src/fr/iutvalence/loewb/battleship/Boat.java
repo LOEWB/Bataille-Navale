@@ -52,5 +52,10 @@ public abstract class Boat
 	{
 		return healthPoints;
 	}
-	
+	public boolean isDead()
+	{
+		if (this.healthPoints == 0)
+			return true;
+		return false;
+	}
 }
