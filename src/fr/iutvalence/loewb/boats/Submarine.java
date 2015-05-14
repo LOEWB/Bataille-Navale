@@ -11,5 +11,6 @@ public class Submarine extends Boat
 		this.horizontal = true;
 		this.coordinates = new Coordinates(6,0);
 		this.placed = false;
+		this.healthPoints = this.size;
 	}
 }

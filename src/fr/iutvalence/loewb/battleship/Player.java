@@ -17,6 +17,7 @@ public class Player
 	public final BoatGrid boatGrid;
 	/** Variable: final grid of checkers. Those checkers are placed by the enemy of this current player*/
     public final CheckerGrid checkerGrid;
+    public Player opponent;
     private final Boat aircraftCarrier;
     private final Boat battleship;
     private final Boat destroyer;
@@ -40,7 +41,6 @@ public class Player
         this.destroyer = new Destroyer();
         this.petroleBoat = new PetroleBoat();
         this.submarine = new Submarine();
-        
     }
     
     public Boat getAircraftCarrier() {
@@ -110,12 +110,18 @@ public class Player
     			if (boat.horizontal == true)
     			{
     				for (int columneNumber= 0; columneNumber<boat.size;columneNumber++)
+    				{
     					this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].changeState();
+    					this.boatGrid.casesTable[coordinates.getAxisX()][columneNumber+coordinates.getAxisY()].boat = boat;
+    				}
     			}
     			else 
     			{
     				for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
+    				{
     					this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][coordinates.getAxisY()].changeState();
+    					this.boatGrid.casesTable[rowNumber+coordinates.getAxisX()][coordinates.getAxisY()].boat = boat;
+    				}
     			}
     		}
     	}
@@ -177,12 +183,18 @@ public class Player
     		if (boat.horizontal == true)
     		{
     			for (int columnNumber= 0; columnNumber<boat.size;columnNumber++)
+    			{
     				this.boatGrid.casesTable[boat.coordinates.getAxisX()][columnNumber+boat.coordinates.getAxisY()].changeState();
+    				this.boatGrid.casesTable[boat.coordinates.getAxisX()][columnNumber+boat.coordinates.getAxisY()].boat = null;
+    			}
     		}
     		else 
     		{
     			for (int rowNumber= 0; rowNumber<boat.size;rowNumber++)
+    			{
     				this.boatGrid.casesTable[rowNumber+boat.coordinates.getAxisX()][boat.coordinates.getAxisY()].changeState();
+    				this.boatGrid.casesTable[rowNumber+boat.coordinates.getAxisX()][boat.coordinates.getAxisY()].boat = null;
+    			}
     		}
     	}
     }
@@ -243,5 +255,23 @@ public class Player
 
   		boat.setHorizontal(!boat.isHorizontal());
   		return false;
+  	}
+  	
+  	public void hit(Coordinates coordinates)
+  	{
+  		if (this.checkerGrid.isInTheGrid(coordinates))
+  		{
+  			if (!this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].isUsedBool())
+  			{
+  				if(this.opponent.boatGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].isUsedBool())
+  				{
+  					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeHitState();
+  					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeState();
+  					this.opponent.boatGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].boat.healthPoints--;
+  				}
+  				else
+  					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeState();
+  			}
+  		}
   	}
 }

@@ -8,6 +8,8 @@ public class Main
 	{
 		Player p1 = new Player("Joueur 1",1);
 		Player p2 = new Player("Joueur 2",2);
+		p1.opponent = p2;
+		p2.opponent = p1;
 		//P1 places his boats
 		p1.placeBoat(p1.getAircraftCarrier(), new Coordinates(0,0));
 		p1.placeBoat(p1.getBattleship(), new Coordinates(2,0));
@@ -23,6 +25,12 @@ public class Main
 		p2.placeBoat(p2.getSubmarine(), new Coordinates(8,0));
 		p2.placeBoat(p2.getDestroyer(), new Coordinates(4,0));
 		System.out.println(p1.getBoatGrid());
-		//System.out.println(p2.getBoatGrid());
+		System.out.println(p2.getBoatGrid());
+		p1.hit(new Coordinates(0,0));
+		p1.hit(new Coordinates(1,0));
+		p1.hit(new Coordinates(25,0));
+		System.out.println(p1.getCheckerGrid());
+		System.out.println(p2.getAircraftCarrier().getHealthPoints());
+		
 	}
 }

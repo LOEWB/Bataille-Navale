@@ -40,4 +40,18 @@ public abstract class Grid
     	}
     	return asciiGrid;
     }
+    
+    
+  	/** Method: To check if the coordinates are in the grid
+  	 * 
+  	 * @param coordinates
+  	 * @return boolean: is in grid or not
+  	 */
+  	public boolean isInTheGrid(Coordinates coordinates)
+  	{
+  		if (coordinates.getAxisX()<ROW_NUMBER && coordinates.getAxisX()>=0)
+  			if (coordinates.getAxisY()<COLUMN_NUMBER && coordinates.getAxisY()>=0)
+  				return true;
+  		return false;
+  	}
 }

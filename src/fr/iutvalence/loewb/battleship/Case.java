@@ -6,12 +6,24 @@ public class Case
     
     /** Variable: boolean which indicates if the case is used or not (either by a part of a boat or a checker) */
     private boolean used = false;
-
+    private boolean hit;
+    public Boat boat;
     /** Constructor*/
     public Case() 
     {
         this.used = false;
+        this.hit = false;
+        this.boat = null;
     }
+	
+
+	public boolean isHit() {
+		return hit;
+	}
+
+	public void changeHitState() {
+		this.hit = !hit;
+	}
 
     /** Method: To know if the case is used or not 
      * 
@@ -37,6 +49,8 @@ public class Case
      */
     public String toString()
     {
+    	if(this.isHit())
+    		return "| O ";
     	if (this.isUsedBool()==false)
     		return "|   ";
     	else return "| X ";

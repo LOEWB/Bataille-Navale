@@ -10,6 +10,8 @@ public abstract class Boat
 	protected boolean placed;
 	/** Variable: the coordinates of the first part of the boat*/
 	protected Coordinates coordinates;	
+	protected int healthPoints;
+	
 	/** Method: To get the size of the boat
      * 
      * @return its size
@@ -45,4 +47,10 @@ public abstract class Boat
 	public void setCoordinates(Coordinates coordinates) {
 		this.coordinates = coordinates;
 	}
+	
+	public int getHealthPoints()
+	{
+		return healthPoints;
+	}
+	
 }
