@@ -268,6 +268,10 @@ public class Player
   					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeHitState();
   					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeState();
   					this.opponent.boatGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].boat.healthPoints--;
+  					if(this.opponent.boatGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].boat.isDead())
+  					{
+  						this.checkerGrid.circleBoat(this.opponent.boatGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].boat);
+  					}
   				}
   				else
   					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeState();
