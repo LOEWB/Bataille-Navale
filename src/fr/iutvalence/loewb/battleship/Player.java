@@ -257,7 +257,7 @@ public class Player
   		return false;
   	}
   	
-  	public void hit(Coordinates coordinates)
+  	public boolean hit(Coordinates coordinates)
   	{
   		if (this.checkerGrid.isInTheGrid(coordinates))
   		{
@@ -272,10 +272,27 @@ public class Player
   					{
   						this.checkerGrid.circleBoat(this.opponent.boatGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].boat);
   					}
+  					return true;
   				}
   				else
   					this.checkerGrid.casesTable[coordinates.getAxisX()][coordinates.getAxisY()].changeState();
   			}
   		}
+  		return false;
+  	}
+  	
+  	public boolean isAlive()
+  	{
+  		if (this.getAircraftCarrier().isDead())
+  			return false;
+  		if (this.getBattleship().isDead())
+  			return false;
+  		if (this.getDestroyer().isDead())
+  			return false;
+  		if (this.getPetroleBoat().isDead())
+  			return false;
+  		if (this.getSubmarine().isDead())
+  			return false;
+  		return true;
   	}
 }
