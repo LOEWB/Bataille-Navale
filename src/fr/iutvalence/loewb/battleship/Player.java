@@ -11,7 +11,7 @@ public class Player
 {
     /** Variable: final string for his name */
     private final String name;
-    /** Variable: final integer for his age */
+    /** Variable: final integer*/
     private final int number;
     /** Variable: final grid of boat. Those boats are placed by this current player*/
 	public final BoatGrid boatGrid;
