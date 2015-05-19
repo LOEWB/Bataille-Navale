@@ -11,8 +11,6 @@ public class Player
 {
     /** Variable: final string for his name */
     private final String name;
-    /** Variable: final integer*/
-    private final int number;
     /** Variable: final grid of boat. Those boats are placed by this current player*/
 	public final BoatGrid boatGrid;
 	/** Variable: final grid of checkers. Those checkers are placed by the enemy of this current player*/
@@ -30,10 +28,9 @@ public class Player
      * @param name
      * @param number
      */
-    public Player(String name, int number) 
+    public Player(String name) 
     {
         this.name = name;
-        this.number = number;
         this.boatGrid = new BoatGrid();
         this.checkerGrid = new CheckerGrid();
         this.aircraftCarrier = new AircraftCarrier();
@@ -70,14 +67,6 @@ public class Player
     public String getName() 
     {
   		return name;
-  	}
-    /** Method: To get the number of the player
-     * 
-     * @return his number
-     */
-  	public int getNumber() 
-  	{
-  		return number;
   	}
   	/** Method: To get the boat grid of the player
      * 

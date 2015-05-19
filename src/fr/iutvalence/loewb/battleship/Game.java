@@ -20,8 +20,8 @@ public class Game
 		System.out.println("\n\nEntrer nom joueur 2 : \n\n");
 		String player2Name = sc.nextLine();
 		
-		p1 = new Player(player1Name,1);
-		p2 = new Player(player2Name,2);
+		p1 = new Player(player1Name);
+		p2 = new Player(player2Name);
 		p1.opponent = p2;
 		p2.opponent = p1;
 		System.out.println("\n\nA "+p1.getName()+" de placer ses bateaux\n\n");
