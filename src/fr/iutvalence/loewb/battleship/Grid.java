@@ -27,20 +27,7 @@ public abstract class Grid
     
     
     
-    /** Method: To display on the console a grid with its cases states*/
-    public String toString()
-    {
-    	String asciiGrid = "   | A | B | C | D | E | F | G | H | I | J |\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-    	for (int rowNumber = 0; rowNumber<ROW_NUMBER;rowNumber++)
-    	{
-    		asciiGrid += " "+rowNumber+" ";
-    		for (int columnNumber = 0; columnNumber<COLUMN_NUMBER;columnNumber++)
-    			asciiGrid += this.casesTable[rowNumber][columnNumber].toString();
-    		asciiGrid += "|\n--------------------------------------------\n";
-    	}
-    	return asciiGrid;
-    }
-    
+
     
   	/** Method: To check if the coordinates are in the grid
   	 * 
