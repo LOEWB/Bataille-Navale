@@ -2,11 +2,13 @@ package fr.iutvalence.loewb.battleship;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/** Defines a game*/
 public class Game 
 {
+	/**Attribute: the two players*/
 	Player p1,p2;
 
+	/**Constructor of the class*/
 	public Game()
 	{
 		this.start();
@@ -14,6 +16,7 @@ public class Game
 		this.endGame();
 	}
 
+	/**Method: To start and initialize a game*/
 	public void start()
 	{
 		Scanner sc = new Scanner(System.in);
@@ -33,6 +36,8 @@ public class Game
 		this.initBoatGrid(p2);
 
 	}
+
+	/**Method: To play the game, the players has to hit*/
 	public void play()
 	{
 		while (p1.isAlive() && p2.isAlive())
@@ -52,7 +57,7 @@ public class Game
 				System.out.println("Entrer le numéro de ligne où frapper : \n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -62,7 +67,7 @@ public class Game
 				System.out.println("\n\nEntrer le numéro de colonne où frapper : \n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -84,7 +89,7 @@ public class Game
 				System.out.println("Entrer le numéro de ligne où frapper : \n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -94,7 +99,7 @@ public class Game
 				System.out.println("\n\nEntrer le numéro de colonne où frapper : \n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -119,8 +124,7 @@ public class Game
 		int choice;
 		Choice final_choice = Choice.NOTHING;
 
-
-
+		//AIRCRAFT CARRIER
 		while(!p.getAircraftCarrier().placed)
 		{
 			sc = new Scanner(System.in);
@@ -129,7 +133,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 			try
 			{
-			rowNumber = sc.nextInt();
+				rowNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -139,7 +143,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 			try
 			{
-			columnNumber = sc.nextInt();
+				columnNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -186,7 +190,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -196,7 +200,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -209,10 +213,7 @@ public class Game
 
 
 
-
-
-
-
+		//BATTLESHIP
 		while(!p.getBattleship().placed)
 		{
 			sc = new Scanner(System.in);
@@ -221,7 +222,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 			try
 			{
-			rowNumber = sc.nextInt();
+				rowNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -231,7 +232,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 			try
 			{
-			columnNumber = sc.nextInt();
+				columnNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -280,7 +281,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -290,7 +291,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -304,8 +305,7 @@ public class Game
 
 
 
-
-
+		//DESTROYER
 		while(!p.getDestroyer().placed)
 		{
 			sc = new Scanner(System.in);
@@ -314,7 +314,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 			try
 			{
-			rowNumber = sc.nextInt();
+				rowNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -324,7 +324,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 			try
 			{
-			columnNumber = sc.nextInt();
+				columnNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -373,7 +373,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -383,7 +383,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -397,7 +397,7 @@ public class Game
 
 
 
-
+		//PETROLEBOAT
 		while(!p.getPetroleBoat().placed)
 		{
 			sc = new Scanner(System.in);
@@ -406,7 +406,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 			try
 			{
-			rowNumber = sc.nextInt();
+				rowNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -416,7 +416,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 			try
 			{
-			columnNumber = sc.nextInt();
+				columnNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -465,7 +465,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -475,7 +475,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -490,8 +490,7 @@ public class Game
 
 
 
-
-
+		//SUBMARINE
 		while(!p.getSubmarine().placed)
 		{
 			sc = new Scanner(System.in);
@@ -500,7 +499,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 			try
 			{
-			rowNumber = sc.nextInt();
+				rowNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -510,7 +509,7 @@ public class Game
 			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 			try
 			{
-			columnNumber = sc.nextInt();
+				columnNumber = sc.nextInt();
 			}
 			catch (InputMismatchException e)
 			{
@@ -559,7 +558,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
 				try
 				{
-				rowNumber = sc.nextInt();
+					rowNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -569,7 +568,7 @@ public class Game
 				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 				try
 				{
-				columnNumber = sc.nextInt();
+					columnNumber = sc.nextInt();
 				}
 				catch (InputMismatchException e)
 				{
@@ -582,6 +581,7 @@ public class Game
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	}
 
+	/** Method: to end a game*/
 	public void endGame()
 	{
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

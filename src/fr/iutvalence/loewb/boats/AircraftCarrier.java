@@ -5,6 +5,7 @@ import fr.iutvalence.loewb.battleship.Coordinates;
 /** Defines an AircraftCarrier boat, extension of the class Boat*/
 public class AircraftCarrier extends Boat
 {
+	/** Constructor of the boat*/
 	public AircraftCarrier()
 	{
 		this.size = 5;
