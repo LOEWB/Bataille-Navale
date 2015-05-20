@@ -92,7 +92,7 @@ public class CheckerGrid extends Grid
     			asciiGrid += this.casesTable[rowNumber][columnNumber].toString();
     		asciiGrid += "|\n--------------------------------------------\n";
     	}
-    	asciiGrid += "\n\n\tX - miss/no boat here\n\n\tO - hit\n\n";
+    	asciiGrid += "\n\n\tX - Raté/Pas de bateau ici\n\n\tO - Touché\n\n";
     	return asciiGrid;
     }
     

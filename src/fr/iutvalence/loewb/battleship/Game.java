@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Game 
 {
 	Player p1,p2;
+
 	public Game()
 	{
 		this.start();
 		this.play();
+		this.endGame();
 	}
 
 	public void start()
@@ -44,6 +46,8 @@ public class Game
 
 			do
 			{
+				if (!p1.isAlive() || !p2.isAlive() )
+					break;
 				System.out.println("Entrer le numéro de ligne où frapper : \n\n");
 				rowNumber = sc.nextInt();
 				System.out.println("\n\nEntrer le numéro de colonne où frapper : \n\n");
@@ -57,6 +61,8 @@ public class Game
 
 			do
 			{
+				if (!p1.isAlive() || !p2.isAlive() )
+					break;
 				System.out.println("Entrer le numéro de ligne où frapper : \n\n");
 				rowNumber = sc.nextInt();
 				System.out.println("\n\nEntrer le numéro de colonne où frapper : \n\n");
@@ -67,7 +73,7 @@ public class Game
 		}
 	}
 
-	/** Method: To place then rotate and move all the boats of a player at the start of a game
+	/** Method: To place then rotate and move all the boats of a player at the beginning of a game
 	 * 
 	 * @param Player p
 	 */
@@ -78,8 +84,6 @@ public class Game
 		int columnNumber = 0;
 		int choice;
 		Choice final_choice = Choice.NOTHING;
-
-
 
 
 
@@ -95,6 +99,68 @@ public class Game
 		}
 		while(final_choice!=Choice.NEXT)
 		{
+			sc = new Scanner(System.in);
+			choice=0;
+			final_choice=Choice.NOTHING;
+			System.out.println("\n"+p.getBoatGrid());
+			System.out.println("\n---------------------\n0 - Rotation         |\n1 - Bouger le bateau |\n2 - Bateau suivant   |\n---------------------\n\n");
+			try 
+			{
+				choice = sc.nextInt();
+				switch(choice){
+				case 0:
+					final_choice=Choice.ROTATION;
+					break;
+				case 1:
+					final_choice=Choice.MOVE;
+					break;
+				case 2:
+					final_choice=Choice.NEXT;
+					break;
+				default:
+					break;
+				}
+			} 
+			catch (IllegalArgumentException | InputMismatchException e)
+			{
+				System.err.println("\nEntrée incorrecte\n");
+				continue;
+			}
+			if (final_choice==Choice.ROTATION)
+			{
+				p.rotationBoat(p.getAircraftCarrier());
+			}
+			if (final_choice==Choice.MOVE)
+			{
+				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
+				rowNumber = sc.nextInt();
+				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
+				columnNumber = sc.nextInt();
+				p.moveBoat(p.getAircraftCarrier(), new Coordinates(rowNumber,columnNumber));
+			}
+		}
+
+
+
+
+
+
+
+		while(!p.getBattleship().placed)
+		{
+			System.out.println("\n"+p.getBoatGrid());
+			System.out.println("Placer le cuirassé (4 cases)");
+			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
+			rowNumber = sc.nextInt();
+			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
+			columnNumber = sc.nextInt();
+			p.placeBoat(p.getBattleship(), new Coordinates(rowNumber,columnNumber));
+			choice=0;
+			final_choice=Choice.NOTHING;
+		}
+		while(final_choice!=Choice.NEXT)
+		{
+			sc = new Scanner(System.in);
 			choice=0;
 			final_choice=Choice.NOTHING;
 			System.out.println("\n"+p.getBoatGrid());
@@ -123,7 +189,7 @@ public class Game
 			}
 			if (final_choice==Choice.ROTATION)
 			{
-				p.rotationBoat(p.getAircraftCarrier());
+				p.rotationBoat(p.getBattleship());
 				System.out.println("\n"+p.getBoatGrid());
 			}
 			if (final_choice==Choice.MOVE)
@@ -133,63 +199,9 @@ public class Game
 				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
 				columnNumber = sc.nextInt();
 				p.moveBoat(p.getAircraftCarrier(), new Coordinates(rowNumber,columnNumber));
-				System.out.println("\n"+p.getBoatGrid());
+				System.out.println("\n"+p.getBattleship());
 			}
 		}
-
-
-
-
-
-
-
-		while(!p.getBattleship().placed)
-		{
-			System.out.println("\n"+p.getBoatGrid());
-			System.out.println("Placer le cuirassé (4 cases)");
-			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
-			rowNumber = sc.nextInt();
-			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
-			columnNumber = sc.nextInt();
-			p.placeBoat(p.getBattleship(), new Coordinates(rowNumber,columnNumber));
-			choice=0;
-			final_choice=Choice.NOTHING;
-		}
-		try 
-		{
-			choice = sc.nextInt();
-			switch(choice){
-			case 0:
-				final_choice=Choice.ROTATION;
-				break;
-			case 1:
-				final_choice=Choice.MOVE;
-				break;
-			case 2:
-				final_choice=Choice.NEXT;
-
-			default: break;
-			}
-		} 
-		catch (IllegalArgumentException e)
-		{
-			System.out.println("Entrée incorrecte");
-		}
-		if (final_choice==Choice.ROTATION)
-		{
-			p.rotationBoat(p.getBattleship());
-			System.out.println("\n"+p.getBoatGrid());
-		}
-		if (final_choice==Choice.MOVE)
-		{
-			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
-			rowNumber = sc.nextInt();
-			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
-			columnNumber = sc.nextInt();
-			p.moveBoat(p.getBattleship(), new Coordinates(rowNumber,columnNumber));
-			System.out.println("\n"+p.getBoatGrid());
-		}
-
 
 
 
@@ -208,41 +220,50 @@ public class Game
 			choice=0;	
 			final_choice=Choice.NOTHING;
 		}
-		try 
+		while(final_choice!=Choice.NEXT)
 		{
-			choice = sc.nextInt();
-			switch(choice){
-			case 0:
-				final_choice=Choice.ROTATION;
-				break;
-			case 1:
-				final_choice=Choice.MOVE;
-				break;
-			case 2:
-				final_choice=Choice.NEXT;
-
-			default: break;
+			sc = new Scanner(System.in);
+			choice=0;
+			final_choice=Choice.NOTHING;
+			System.out.println("\n"+p.getBoatGrid());
+			System.out.println("\n---------------------\n0 - Rotation         |\n1 - Bouger le bateau |\n2 - Bateau suivant   |\n---------------------\n\n");
+			try 
+			{
+				choice = sc.nextInt();
+				switch(choice){
+				case 0:
+					final_choice=Choice.ROTATION;
+					break;
+				case 1:
+					final_choice=Choice.MOVE;
+					break;
+				case 2:
+					final_choice=Choice.NEXT;
+					break;
+				default:
+					break;
+				}
+			} 
+			catch (IllegalArgumentException | InputMismatchException e)
+			{
+				System.err.println("\nEntrée incorrecte\n");
+				continue;
 			}
-		} 
-		catch (IllegalArgumentException e)
-		{
-			System.out.println("Entrée incorrecte");
+			if (final_choice==Choice.ROTATION)
+			{
+				p.rotationBoat(p.getDestroyer());
+				System.out.println("\n"+p.getBoatGrid());
+			}
+			if (final_choice==Choice.MOVE)
+			{
+				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
+				rowNumber = sc.nextInt();
+				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
+				columnNumber = sc.nextInt();
+				p.moveBoat(p.getDestroyer(), new Coordinates(rowNumber,columnNumber));
+				System.out.println("\n"+p.getBoatGrid());
+			}
 		}
-		if (final_choice==Choice.ROTATION)
-		{
-			p.rotationBoat(p.getDestroyer());
-			System.out.println("\n"+p.getBoatGrid());
-		}
-		if (final_choice==Choice.MOVE)
-		{
-			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
-			rowNumber = sc.nextInt();
-			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
-			columnNumber = sc.nextInt();
-			p.moveBoat(p.getDestroyer(), new Coordinates(rowNumber,columnNumber));
-			System.out.println("\n"+p.getBoatGrid());
-		}
-
 
 
 
@@ -260,41 +281,50 @@ public class Game
 			choice=0;
 			final_choice=Choice.NOTHING;
 		}
-		try 
+		while(final_choice!=Choice.NEXT)
 		{
-			choice = sc.nextInt();
-			switch(choice){
-			case 0:
-				final_choice=Choice.ROTATION;
-				break;
-			case 1:
-				final_choice=Choice.MOVE;
-				break;
-			case 2:
-				final_choice=Choice.NEXT;
-
-			default: break;
+			sc = new Scanner(System.in);
+			choice=0;
+			final_choice=Choice.NOTHING;
+			System.out.println("\n"+p.getBoatGrid());
+			System.out.println("\n---------------------\n0 - Rotation         |\n1 - Bouger le bateau |\n2 - Bateau suivant   |\n---------------------\n\n");
+			try 
+			{
+				choice = sc.nextInt();
+				switch(choice){
+				case 0:
+					final_choice=Choice.ROTATION;
+					break;
+				case 1:
+					final_choice=Choice.MOVE;
+					break;
+				case 2:
+					final_choice=Choice.NEXT;
+					break;
+				default:
+					break;
+				}
+			} 
+			catch (IllegalArgumentException | InputMismatchException e)
+			{
+				System.err.println("\nEntrée incorrecte\n");
+				continue;
 			}
-		} 
-		catch (IllegalArgumentException e)
-		{
-			System.out.println("Entrée incorrecte");
+			if (final_choice==Choice.ROTATION)
+			{
+				p.rotationBoat(p.getPetroleBoat());
+				System.out.println("\n"+p.getBoatGrid());
+			}
+			if (final_choice==Choice.MOVE)
+			{
+				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
+				rowNumber = sc.nextInt();
+				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
+				columnNumber = sc.nextInt();
+				p.moveBoat(p.getPetroleBoat(), new Coordinates(rowNumber,columnNumber));
+				System.out.println("\n"+p.getBoatGrid());
+			}
 		}
-		if (final_choice==Choice.ROTATION)
-		{
-			p.rotationBoat(p.getPetroleBoat());
-			System.out.println("\n"+p.getBoatGrid());
-		}
-		if (final_choice==Choice.MOVE)
-		{
-			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
-			rowNumber = sc.nextInt();
-			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
-			columnNumber = sc.nextInt();
-			p.moveBoat(p.getPetroleBoat(), new Coordinates(rowNumber,columnNumber));
-			System.out.println("\n"+p.getBoatGrid());
-		}
-
 
 
 
@@ -314,40 +344,59 @@ public class Game
 			choice=0;
 			final_choice=Choice.NOTHING;
 		}
-		try 
+		while(final_choice!=Choice.NEXT)
 		{
-			choice = sc.nextInt();
-			switch(choice){
-			case 0:
-				final_choice=Choice.ROTATION;
-				break;
-			case 1:
-				final_choice=Choice.MOVE;
-				break;
-			case 2:
-				final_choice=Choice.NEXT;
-
-			default: break;
+			sc = new Scanner(System.in);
+			choice=0;
+			final_choice=Choice.NOTHING;
+			System.out.println("\n"+p.getBoatGrid());
+			System.out.println("\n---------------------\n0 - Rotation         |\n1 - Bouger le bateau |\n2 - Terminé          |\n---------------------\n\n");
+			try 
+			{
+				choice = sc.nextInt();
+				switch(choice){
+				case 0:
+					final_choice=Choice.ROTATION;
+					break;
+				case 1:
+					final_choice=Choice.MOVE;
+					break;
+				case 2:
+					final_choice=Choice.NEXT;
+					break;
+				default:
+					break;
+				}
+			} 
+			catch (IllegalArgumentException | InputMismatchException e)
+			{
+				System.err.println("\nEntrée incorrecte\n");
+				continue;
 			}
-		} 
-		catch (IllegalArgumentException e)
-		{
-			System.out.println("Entrée incorrecte");
+			if (final_choice==Choice.ROTATION)
+			{
+				p.rotationBoat(p.getSubmarine());
+				System.out.println("\n"+p.getBoatGrid());
+			}
+			if (final_choice==Choice.MOVE)
+			{
+				System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
+				rowNumber = sc.nextInt();
+				System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
+				columnNumber = sc.nextInt();
+				p.moveBoat(p.getSubmarine(), new Coordinates(rowNumber,columnNumber));
+				System.out.println("\n"+p.getBoatGrid());
+			}
 		}
-		if (final_choice==Choice.ROTATION)
-		{
-			p.rotationBoat(p.getSubmarine());
-			System.out.println("\n"+p.getBoatGrid());
-		}
-		if (final_choice==Choice.MOVE)
-		{
-			System.out.println("\n\nEntrer numéro de ligne (0-9)\n\n");
-			rowNumber = sc.nextInt();
-			System.out.println("\n\nEntrer numéro de colonne (0-9)\n\n");
-			columnNumber = sc.nextInt();
-			p.moveBoat(p.getSubmarine(), new Coordinates(rowNumber,columnNumber));
-			System.out.println("\n"+p.getBoatGrid());
-		}
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	}
 
+	public void endGame()
+	{
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		if(this.p1.isAlive())
+			System.out.println("\t\t\t\t"+p1.getName()+" s'est servi du visage de "+p2.getName()+" comme d'un paillasson !\n\n");
+		else
+			System.out.println("\t\t\t\t"+p2.getName()+" s'est servi du visage de "+p1.getName()+" comme d'un paillasson !\n\n");
 	}
 }

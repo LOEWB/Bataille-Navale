@@ -61,7 +61,7 @@ public class BoatGrid extends Grid
     			asciiGrid += this.casesTable[rowNumber][columnNumber].toString();
     		asciiGrid += "|\n--------------------------------------------\n";
     	}
-    	asciiGrid += "\n\n\tX - Boat\n\n";
+    	asciiGrid += "\n\n\tX - Bateau\n\n";
     	return asciiGrid;
     }
     

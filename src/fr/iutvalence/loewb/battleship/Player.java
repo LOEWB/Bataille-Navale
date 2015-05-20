@@ -273,15 +273,11 @@ public class Player
   	public boolean isAlive()
   	{
   		if (this.getAircraftCarrier().isDead())
-  			return false;
-  		if (this.getBattleship().isDead())
-  			return false;
-  		if (this.getDestroyer().isDead())
-  			return false;
-  		if (this.getPetroleBoat().isDead())
-  			return false;
-  		if (this.getSubmarine().isDead())
-  			return false;
+  			if (this.getBattleship().isDead())
+  				if (this.getDestroyer().isDead())
+  					if (this.getPetroleBoat().isDead())
+  						if (this.getSubmarine().isDead())
+  							return false;
   		return true;
   	}
 }
