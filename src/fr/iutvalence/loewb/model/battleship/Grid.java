@@ -1,4 +1,4 @@
-package fr.iutvalence.loewb.battleship;
+package fr.iutvalence.loewb.model.battleship;
 
 
 /** Defines a grid of cases. Designed to contain either boats or checkers */

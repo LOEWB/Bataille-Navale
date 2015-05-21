@@ -1,4 +1,4 @@
-package fr.iutvalence.loewb.battleship;
+package fr.iutvalence.loewb.model.battleship;
 /* TODO package. */
 /** Defines a coordinates with too axis X and Y */
 public class Coordinates 

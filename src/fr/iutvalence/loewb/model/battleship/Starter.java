@@ -1,4 +1,6 @@
-package fr.iutvalence.loewb.battleship;
+package fr.iutvalence.loewb.model.battleship;
+import fr.iutvalence.loewb.view.gui.*;
+import javax.swing.JFrame;
 
 /**Starter class with the entry point
  * 
@@ -13,6 +15,7 @@ public class Starter
 	 */
 	public static void main (String args[])
 	{
-		Game game = new Game();
+		//Game game = new Game();
+		Window window = new Window();
 	}
 }

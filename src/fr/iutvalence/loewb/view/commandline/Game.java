@@ -1,7 +1,11 @@
-package fr.iutvalence.loewb.battleship;
+package fr.iutvalence.loewb.view.commandline;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import fr.iutvalence.loewb.model.battleship.Choice;
+import fr.iutvalence.loewb.model.battleship.Coordinates;
+import fr.iutvalence.loewb.model.battleship.Player;
 /** Defines a game*/
 public class Game 
 {
@@ -34,7 +38,6 @@ public class Game
 		this.initBoatGrid(p1);
 		System.out.println("\n\nA "+p1.getName()+" de placer ses bateaux\n\n");
 		this.initBoatGrid(p2);
-
 	}
 
 	/**Method: To play the game, the players has to hit*/

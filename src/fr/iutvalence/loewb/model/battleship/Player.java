@@ -1,10 +1,10 @@
-package fr.iutvalence.loewb.battleship;
+package fr.iutvalence.loewb.model.battleship;
 
-import fr.iutvalence.loewb.boats.AircraftCarrier;
-import fr.iutvalence.loewb.boats.Battleship;
-import fr.iutvalence.loewb.boats.Destroyer;
-import fr.iutvalence.loewb.boats.PetroleBoat;
-import fr.iutvalence.loewb.boats.Submarine;
+import fr.iutvalence.loewb.model.boats.AircraftCarrier;
+import fr.iutvalence.loewb.model.boats.Battleship;
+import fr.iutvalence.loewb.model.boats.Destroyer;
+import fr.iutvalence.loewb.model.boats.PetroleBoat;
+import fr.iutvalence.loewb.model.boats.Submarine;
 
 /** Defines a player */
 public class Player 

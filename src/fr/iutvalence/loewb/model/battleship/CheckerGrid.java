@@ -1,4 +1,6 @@
-package fr.iutvalence.loewb.battleship;
+package fr.iutvalence.loewb.model.battleship;
+
+
 /** Defines the grid extending the class Grid, which is designed to contain checkers */
 public class CheckerGrid extends Grid
 {
