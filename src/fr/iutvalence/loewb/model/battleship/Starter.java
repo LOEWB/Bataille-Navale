@@ -1,21 +1,25 @@
 package fr.iutvalence.loewb.model.battleship;
-import fr.iutvalence.loewb.view.gui.*;
-import javax.swing.JFrame;
 
-/**Starter class with the entry point
- * 
+
+import fr.iutvalence.loewb.view.gui.Window;
+
+
+/**
+ * Starter class with the entry point
+ *
  * @authors OMEL|LOEW
  *
  */
-public class Starter 
+public class Starter
 {
-	/**
-	 * Entry point of the application
-	 * @param args
-	 */
-	public static void main (String args[])
-	{
-		//Game game = new Game();
-		Window window = new Window();
-	}
+  /**
+   * Entry point of the application
+   * 
+   * @param args
+   */
+  public static void main(String args[])
+  {
+    // Game game = new Game();
+    Window window = new Window();
+  }
 }
