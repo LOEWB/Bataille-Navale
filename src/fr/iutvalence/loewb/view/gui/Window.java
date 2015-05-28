@@ -5,18 +5,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+
+import fr.iutvalence.loewb.model.battleship.Player;
 
 
 public class Window extends JFrame
 {
 
-	private JPanel container;
 	private JSplitPane splitQuit, splitGo, splitJoueurs;
 	private JTextField tfJoueur1 = new JTextField("Joueur1");
 	private JTextField tfJoueur2 = new JTextField("Joueur2");
@@ -25,14 +28,19 @@ public class Window extends JFrame
 
 	public Window()
 	{
-
-		this.setSize(1100, 700);
+		this.setSize(800, 500);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		//this.start();
+		this.placeBoat();
+		this.setVisible(true);
+	}
+	public void start()
+	{
+		
 		JPanel quitter = new JPanel();
-		quitter.setPreferredSize(new Dimension(1000, 400));
+		quitter.setPreferredSize(new Dimension(800, 300));
 		JPanel go = new JPanel();
 		JPanel joueur1 = new JPanel();
 		JPanel joueur2 = new JPanel();
@@ -42,16 +50,16 @@ public class Window extends JFrame
 		joueur2.setBackground(Color.white);
 
 		splitJoueurs = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, joueur1, joueur2);
-		splitJoueurs.setDividerSize(1);
+		splitJoueurs.setDividerSize(0);
 		splitJoueurs.setDividerLocation(this.getWidth()/2);
 
 		splitGo = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitJoueurs, go);
 		splitGo.setDividerSize(0);
-		splitGo.setDividerLocation(100);
+		splitGo.setDividerLocation(50);
 
 		splitQuit = new JSplitPane(JSplitPane.VERTICAL_SPLIT, quitter, splitGo);
 		splitQuit.setDividerSize(0);
-		splitQuit.setDividerLocation(400);
+		splitQuit.setDividerLocation(380);
 
 		Font police = new Font("Arial", Font.BOLD, 14);
 		joueur1.setFont(police);
@@ -74,7 +82,30 @@ public class Window extends JFrame
 		joueur2.add(tfJoueur2);
 
 		this.getContentPane().add(splitQuit);
-		this.setVisible(true);
+	}
 
+	public void placeBoat()
+	{
+		JPanel gridBoatPan = new JPanel();
+		JLabel PlayerLabelPan = new JLabel("Joueur 1");
+		
+		JSplitPane splitGrid = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,new GridBoatPan(), new BoatTablePan());
+		splitGrid.setDividerLocation(this.getWidth()/4*3);
+		splitGrid.setDividerSize(0);
+		JSplitPane splitDone = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,new JLabel("Placez vos bateaux"),new DoneButton());
+		splitDone.setDividerLocation(this.getWidth()/4*3);
+		splitDone.setDividerSize(0);
+		JSplitPane centralSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,splitGrid,splitDone);
+		centralSplit.setDividerLocation(this.getHeight()/5*4);
+		centralSplit.setDividerSize(0);
+		JSplitPane finalSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT,PlayerLabelPan,centralSplit);
+		finalSplit.setDividerLocation(this.getHeight()/15);
+		finalSplit.setDividerSize(0);
+		this.setContentPane(finalSplit);
+	}
+	
+	public void play()
+	{
+		
 	}
 }
